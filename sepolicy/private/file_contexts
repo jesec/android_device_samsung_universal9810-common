@@ -20,3 +20,6 @@
 
 # Vibrator HAL
 /system/bin/hw/android.hardware\.vibrator@1\.0-service\.9810 u:object_r:hal_vibrator_9810_exec:s0
+
+# USB HAL
+/system/bin/hw/android\.hardware\.usb@1\.0-service\.9810 u:object_r:hal_usb_default_exec:s0

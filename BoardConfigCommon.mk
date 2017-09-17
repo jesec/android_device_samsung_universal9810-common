@@ -109,6 +109,9 @@ endif
 TARGET_LD_SHIM_LIBS := \
     /vendor/lib/hw/audio.primary.universal9810.so|libshim_audio.so
 
+# HIDL
+DEVICE_FRAMEWORK_MANIFEST_FILE += $(COMMON_PATH)/framework_manifest.xml
+
 # Include
 TARGET_SPECIFIC_HEADER_PATH := $(COMMON_PATH)/include
 
