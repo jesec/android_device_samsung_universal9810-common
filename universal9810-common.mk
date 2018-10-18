@@ -41,6 +41,10 @@ PRODUCT_FULL_TREBLE_OVERRIDE := true
 
 # VNDK
 PRODUCT_PACKAGES += vndk_package
+PRODUCT_EXTRA_VNDK_VERSIONS := 27
+PRODUCT_COPY_FILES += \
+    $(SRC_TARGET_DIR)/product/vndk/init.vndk-27.rc:system/etc/init/init.vndk-27.rc \
+    $(LOCAL_PATH)/vndk/ld.config.27.txt:system/etc/ld.config.27.txt
 
 # SP-NDK
 PRODUCT_PACKAGES += \

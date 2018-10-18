@@ -34,5 +34,8 @@ write_makefiles "$MY_DIR"/proprietary-files.txt true
 # Offline charging
 write_makefiles "$MY_DIR"/proprietary-files-lpm.txt true
 
+# VNDK
+write_makefiles "$MY_DIR"/proprietary-files-vndk.txt true
+
 # We are done!
 write_footers
