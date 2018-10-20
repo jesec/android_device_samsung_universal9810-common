@@ -11,6 +11,7 @@ on post-fs-data
     chown system wifi /data/misc/wifi/wpa_supplicant.conf
     chown system wifi /data/misc/wifi/p2p_supplicant.conf
     mkdir /data/misc/wifi_share_profile 0771 wifi system
+    mkdir /data/misc/wifi_hostapd 0771 wifi system
     mkdir /data/misc/wifi/sockets 0770 wifi wifi
     mkdir /data/misc/wifi/log/ 0770 wifi system
     mkdir /data/media/wifi/ 0770 wifi system
@@ -32,6 +33,7 @@ on post-fs-data
     chmod 0664 /data/misc/conn/.ant.info
 
     # for WIFI Version
+    write /data/misc/conn/.wifiver.info 0
     chown system root /data/misc/conn/.wifiver.info
     chmod 0666 /data/misc/conn/.wifiver.info
 	
@@ -45,6 +47,10 @@ on post-fs-data
     # write /data/misc/conn/.memdump.info 2
     chown system root /data/misc/conn/.memdump.info
     chmod 0666 /data/misc/conn/.memdump.info
+
+    # for ADPS blacklist AP
+    chown system root /data/misc/conn/.bad_ap_list.info
+    chmod 0666 /data/misc/conn/.bad_ap_list.info
 
     # for WIFI DONGLE EVENT LOG
     write /data/misc/conn/.logtrace.info 1
@@ -64,12 +70,13 @@ on post-fs-data
     # for WIFI hotspot
     write /data/misc/conn/.softap.info 0
     chown system root /data/misc/conn/.softap.info
-    chmod 0640 /data/misc/conn/.softap.info
+    chmod 0666 /data/misc/conn/.softap.info
+    chmod 0664 /vendor/etc/wifi/indoorchannel.info
+    chown system wifi /vendor/etc/wifi/indoorchannel.info
 
     # for fwpath
     chmod 0666 /sys/module/wlan/parameters/fwpath
 
-	
 on boot
     setprop wifi.interface wlan0
 

@@ -3,7 +3,7 @@ on init
     symlink /dev/block/platform/11120000.ufs/by-name/RADIO /dev/mbin0
     restorecon /dev/mbin0
 
-    write /proc/sys/net/core/netdev_max_backlog 5000
+    write /proc/sys/net/core/netdev_max_backlog 30000
 
 on fs
     chown radio system /efs
@@ -18,9 +18,6 @@ on fs
 
     # For cpefs partition
     mkdir /cpefs 0771 radio system
-    wait /dev/block/platform/11120000.ufs/by-name/CPEFS
-    check_fs /dev/block/platform/11120000.ufs/by-name/CPEFS ext4
-    mount ext4 /dev/block/platform/11120000.ufs/by-name/CPEFS /cpefs noatime nosuid nodev barrier=1
     chown radio system /cpefs
     chmod 0771 /cpefs
 

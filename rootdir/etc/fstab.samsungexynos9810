@@ -9,6 +9,7 @@
 /dev/block/platform/11120000.ufs/by-name/EFS            /efs        ext4    noatime,nosuid,nodev,noauto_da_alloc,discard,journal_checksum,data=ordered,errors=panic       wait,check
 /dev/block/platform/11120000.ufs/by-name/MISC           /misc       emmc    defaults                                                                                      defaults
 /dev/block/platform/11120000.ufs/by-name/DQMDBG         /dqmdbg     ext4    noatime,nosuid,nodev,noauto_da_alloc,discard,journal_checksum,data=ordered,errors=panic       wait,check
+/dev/block/platform/11120000.ufs/by-name/CPEFS          /cpefs      ext4    noatime,nosuid,nodev,noauto_da_alloc,discard,journal_checksum,data=ordered,errors=panic       wait,check,nofail
 
 # VOLD - fstab.star2lte
 /dev/block/platform/11120000.ufs/by-name/HIDDEN         /preload    ext4    defaults    voldmanaged=preload:auto

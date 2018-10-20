@@ -90,6 +90,7 @@ on init
     chown system radio /sys/class/sensors/gyro_sensor/selftest_dps
     chown system radio /sys/class/sensors/gyro_sensor/vendor
     chown system radio /sys/class/sensors/gyro_sensor/name
+    chown system radio /sys/class/sensors/gyro_sensor/selftest_revised
 
 # Barometer_sensor
     chown system radio /sys/class/sensors/barometer_sensor/sea_level_pressure
@@ -163,7 +164,7 @@ on init
     chown system radio /sys/class/sensors/ssp_sensor/ori_poll_delay
     chown system radio /sys/class/sensors/ssp_sensor/thermistor_channel_0
     chown system radio /sys/class/sensors/ssp_sensor/thermistor_channel_1
-    chown system radio /sys/class/sensors/ssp_sensor/reset_info
+    chown system radio /sys/class/sensors/ssp_sensor/bcm_minidump
     chown root system /sys/class/sec/sensorhub/mcu_power
 
 # Sensorhub IIO
@@ -234,17 +235,24 @@ on post-fs-data
     chown system audio /sys/class/dsm/max98512/spk_excu_overcnt_r
     chown system audio /sys/class/dsm/max98512/spk_temp_max
     chown system audio /sys/class/dsm/max98512/spk_temp_max_r
+    chown system audio /sys/class/dsm/max98512/spk_temp_max_keep
+    chown system audio /sys/class/dsm/max98512/spk_temp_max_keep_r
     chown system audio /sys/class/dsm/max98512/spk_temp_maxtime
     chown system audio /sys/class/dsm/max98512/spk_temp_maxtime_r
     chown system audio /sys/class/dsm/max98512/spk_temp_overcnt
     chown system audio /sys/class/dsm/max98512/spk_temp_overcnt_r
     chown system audio /sys/class/dsm/max98512/spk_amp_reg_wrong_cnt
     chown system audio /sys/class/dsm/max98512/spk_amp_reg_diff_dump
+    chown system audio /sys/class/dsm/maxdsm_cal/amp_screen_interval
+    chown system audio /sys/class/dsm/maxdsm_cal/amp_screen_ratio
+    chown system audio /sys/class/dsm/maxdsm_cal/amp_screen_ratio_r
+    chown system audio /sys/class/dsm/maxdsm_cal/amp_screen_status
     chown system audio /sys/class/dsm/maxdsm_cal/duration
     chown system audio /sys/class/dsm/maxdsm_cal/max
     chown system audio /sys/class/dsm/maxdsm_cal/min
     chown system audio /sys/class/dsm/maxdsm_cal/rdc
     chown system audio /sys/class/dsm/maxdsm_cal/rdc_r
+    chown system audio /sys/class/dsm/maxdsm_cal/screen_duration
     chown system audio /sys/class/dsm/maxdsm_cal/status
     chown system audio /sys/class/dsm/maxdsm_cal/temp
     chown system audio /sys/class/dsm/maxdsm_cal/v_duration
@@ -282,11 +290,13 @@ on post-fs-data
     mkdir /data/log/abox 0770 audioserver system
 
 # Change permission for A-Box firmware logs file & GPR dump
-    chown audioserver system /sys/kernel/debug/abox/log-00
+    chown audioserver system /sys/devices/platform/17c50000.abox/reset
+    chown audioserver system /sys/devices/platform/17c50000.abox/service
     chown audioserver system /sys/devices/platform/17c50000.abox/0.abox_debug/gpr
     chown audioserver system /sys/devices/platform/17c50000.abox/0.abox_debug/calliope_dram
     chown audioserver system /sys/devices/platform/17c50000.abox/0.abox_debug/calliope_iva
     chown audioserver system /sys/devices/platform/17c50000.abox/0.abox_debug/calliope_sram
+    chown audioserver system /sys/kernel/debug/abox/log-00
 
 # VTS sysfs file permission
     chown audioserver system /sys/devices/platform/13810000.vts/vts_google_model
@@ -307,6 +317,9 @@ on post-fs-data
     chown system radio /sys/class/camera/rear/rear2_checkfw_user
     chown system radio /sys/class/camera/rear/rear2_checkfw_factory
     chown system radio /sys/class/camera/rear/rear2_tilt
+    chown system radio /sys/class/camera/rear/rear_f2_paf_offset_mid
+    chown system radio /sys/class/camera/rear/rear_f2_paf_offset_far
+    chown system radio /sys/class/camera/rear/rear_f2_paf_cal_check
     chown system system /sys/class/camera/rear/rear2_hwparam
     chown system radio /sys/class/camera/rear/rear_dualcal
     chown system radio /sys/class/camera/rear/rear_dualcal_extra
@@ -319,6 +332,7 @@ on post-fs-data
     chown system radio /sys/class/camera/rear/rear_afcal
     chown system radio /sys/class/camera/rear/rear_paf_offset_mid
     chown system radio /sys/class/camera/rear/rear_paf_offset_far
+    chown system radio /sys/class/camera/rear/rear_paf_cal_check
     chown system system /sys/class/camera/rear/rear_hwparam
     chown cameraserver cameraserver /sys/class/camera/rear/rear_awb_master
     chown cameraserver cameraserver /sys/class/camera/rear/rear_awb_module
@@ -378,6 +392,35 @@ on boot
     # Set up kernel tracing, but disable it by default
     chmod 0222 /sys/kernel/debug/tracing/trace_marker
     write /sys/kernel/debug/tracing/tracing_on 0
+
+    # Permissions for NAD
+    symlink /dev/block/platform/11120000.ufs/by-name/NAD_REFER /dev/block/NAD_REFER
+    chown system radio /sys/class/sec/sec_nad/nad_stat
+    chmod 0664 /sys/class/sec/sec_nad/nad_stat
+    chown system radio /sys/class/sec/sec_nad/nad_erase
+    chmod 0664 /sys/class/sec/sec_nad/nad_erase
+    chown system radio /sys/class/sec/sec_nad/nad_acat
+    chmod 0664 /sys/class/sec/sec_nad/nad_acat
+    chown system radio /sys/class/sec/sec_nad/nad_dram
+    chmod 0664 /sys/class/sec/sec_nad/nad_dram
+    chown system radio /sys/class/sec/sec_nad/nad_all
+    chmod 0664 /sys/class/sec/sec_nad/nad_all
+    chown system radio /sys/class/sec/sec_nad/nad_support
+    chmod 0664 /sys/class/sec/sec_nad/nad_support
+    chown system radio /sys/class/sec/sec_nad/nad_api
+    chmod 0664 /sys/class/sec/sec_nad/nad_api
+    chown system radio /dev/block/NAD_REFER
+    chmod 0664 /dev/block/NAD_REFER
+    chown system radio /sys/class/sec/sec_nad_balancer/balancer
+    chmod 0664 /sys/class/sec/sec_nad_balancer/balancer
+    chown system radio /sys/class/sec/sec_nad_balancer/status
+    chmod 0664 /sys/class/sec/sec_nad_balancer/status
+    chown system radio /sys/class/sec/sec_nad_balancer/timeout
+    chmod 0664 /sys/class/sec/sec_nad_balancer/timeout
+
+    # Permissions for SEC_DETECT
+    chown system radio /sys/class/sec/sec_detect_conn/enabled
+    chmod 0664 /sys/class/sec/sec_detect_conn/enabled
 
 # Permission for DVFS
     chown system radio /sys/power/cpufreq_min_limit
@@ -515,6 +558,18 @@ on boot
     chmod 0664 /sys/class/adc_meter/s2mps18_adc/adc_reg_6
     chmod 0664 /sys/class/adc_meter/s2mps18_adc/adc_reg_7
 
+    # S2MPS18 PMIC manual reset
+    chown system system /sys/class/sec/ap_pmic/manual_reset
+
+    # S2MPS18 PMIC for hqm
+    chown system system /sys/class/sec/ap_pmic/th120C_count
+    chown system system /sys/class/sec/ap_pmic/th140C_count
+    chown system system /sys/class/sec/ap_pmic/hqm_bocp_count
+    chown system system /sys/class/sec/rtc/smpl_warn_cnt
+
+    # S2DOS05 Display PMIC Power Meter
+    chown system system /sys/class/sec/disp_pmic/power_meter/adc_mode
+
     # LPM Info
     chown system system /efs/lpm_info.log
     chmod 0660 /efs/lpm_info.log
@@ -634,15 +689,17 @@ on fs
 	chown system system /sys/class/lcd/panel/siop_enable
 	chown system system /sys/class/lcd/panel/temperature
 	chown system radio /sys/class/lcd/panel/mcd_mode
+	chown system radio /sys/class/lcd/panel/mcd_resistance
 	chown system system /sys/class/lcd/panel/lux
 	chown system media_rw /sys/class/lcd/panel/adaptive_control
 	chown system system /sys/class/lcd/panel/SVC_OCTA
 	chown system system /sys/class/lcd/panel/xtalk_mode
 	chown system system /sys/class/lcd/panel/mst
-	chown system system /sys/class/lcd/panel/poc
+	chown system system /sys/class/lcd/panel/gamma_flash
 	chown system system /sys/class/lcd/panel/gct
 	chown system system /sys/class/lcd/panel/grayspot
 	chown system system /sys/class/lcd/panel/irc_mode
+	chown system system /sys/class/lcd/panel/isc_defect
 
 # Permissions for LCD COPR
 	chown system system /sys/class/lcd/panel/copr
@@ -686,6 +743,11 @@ on fs
 	chown system system /sys/class/mdnie/mdnie/whiteRGB
 	chown system system /sys/class/mdnie/mdnie/light_notification
 
+# Permissions for System LSI HDR LUT
+	chown system system /sys/module/hdr_tunables/parameters/tm_override_enable
+	chown system system /sys/module/hdr_tunables/parameters/tm_lut_x
+	chown system system /sys/module/hdr_tunables/parameters/tm_lut_y
+
 # Permissions for System LSI NFC
 # NFC : Permissions for NFC
     chmod 0660 /dev/sec-nfc
@@ -707,6 +769,9 @@ on fs
 # DP error info
     chmod 0660 /sys/class/dp_sec/dp_error_info
     chown system system /sys/class/dp_sec/dp_error_info
+# DP DRM
+    chmod 0660 /sys/class/dp_sec/dp_drm
+    chown system system /sys/class/dp_sec/dp_drm
 
 # Copy DRM Key
 #    copy /system/app/wv.keys /factory/wv.keys
@@ -742,6 +807,17 @@ on fs
     chown system system /sys/class/sec/led/led_blink
     chown system system /sys/class/sec/led/led_br_lev
     chown system system /sys/class/sec/led/led_lowpower
+# Sensors
+# Fingerprint_sensor
+    chown system radio /sys/class/fingerprint/fingerprint/type_check
+    chown system radio /sys/class/fingerprint/fingerprint/name
+    chown system radio /sys/class/fingerprint/fingerprint/vendor
+    chown system radio /sys/class/fingerprint/fingerprint/adm
+    chown system radio /sys/class/fingerprint/fingerprint/bfs_values
+
+# For Retail
+    chown system system /sys/module/sec_debug_hard_reset_hook/parameters/hard_reset_hook_enable
+    chmod 0664 /sys/module/sec_debug_hard_reset_hook/parameters/hard_reset_hook_enable
 
 #load ecd firmware
     write /proc/ecd/load_firmware 1
