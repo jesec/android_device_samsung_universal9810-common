@@ -82,6 +82,8 @@ PRODUCT_PACKAGES += \
     libnfc_nci_jni \
     NfcNci \
     Tag
+PRODUCT_COPY_FILES += \
+    device/generic/common/nfc/libnfc-nci.conf:system/etc/libnfc-nci.conf
 
 # Power
 PRODUCT_PACKAGES += \
