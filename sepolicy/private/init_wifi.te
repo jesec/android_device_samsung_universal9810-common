@@ -1,0 +1,10 @@
+type init_wifi, domain, coredomain;
+type init_wifi_exec, exec_type, file_type;
+init_daemon_domain(init_wifi)
+
+allow init_wifi shell_exec:file rx_file_perms;
+allow init_wifi toolbox_exec:file rx_file_perms;
+
+allow init_wifi vendor_configs_file:file r_file_perms;
+allow init_wifi wifi_data_file:dir ra_dir_perms;
+allow init_wifi wifi_data_file:file { create_file_perms rw_file_perms };

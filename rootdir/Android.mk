@@ -57,6 +57,13 @@ LOCAL_MODULE_PATH       := $(TARGET_ROOT_OUT)
 include $(BUILD_PREBUILT)
 
 include $(CLEAR_VARS)
+LOCAL_MODULE            := init.wifi.sh
+LOCAL_MODULE_TAGS       := optional eng
+LOCAL_MODULE_CLASS      := EXECUTABLES
+LOCAL_SRC_FILES         := bin/init.wifi.sh
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
 LOCAL_MODULE            := ueventd.samsungexynos9810.rc
 LOCAL_MODULE_TAGS       := optional eng
 LOCAL_MODULE_CLASS      := ETC

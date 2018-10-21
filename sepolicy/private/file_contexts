@@ -6,6 +6,9 @@
 /sys/devices/platform/bluetooth/rfkill/rfkill0/state    u:object_r:sysfs_bluetooth_writable:s0
 /sys/devices/platform/bluetooth/rfkill/rfkill0/type    u:object_r:sysfs_bluetooth_writable:s0
 
+# Wi-Fi
+/system/bin/init.wifi.sh u:object_r:init_wifi_exec:s0
+
 # Block device for ZRAM
 /dev/block/zram0 u:object_r:swap_block_device:s0
 
