@@ -6,10 +6,10 @@ LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 
 LOCAL_SRC_FILES := \
-    fingerprint.c
+    fingerprint.cpp
 
 LOCAL_SHARED_LIBRARIES := \
-    libhardware liblog
+    libhardware liblog libvndksupport
 
 LOCAL_MODULE_RELATIVE_PATH := hw
 LOCAL_MODULE := fingerprint.$(TARGET_BOARD_PLATFORM)
